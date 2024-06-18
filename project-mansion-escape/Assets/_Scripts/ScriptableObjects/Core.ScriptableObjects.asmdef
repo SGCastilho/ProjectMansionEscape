@@ -1,10 +1,7 @@
 {
-    "name": "Core.Player",
-    "rootNamespace": "Core.Player",
-    "references": [
-        "GUID:75469ad4d38634e559750d17036d5f7c",
-        "GUID:c7ef3ea736cccdb4aaeb2aabe73eaaa3"
-    ],
+    "name": "Core.ScriptableObjects",
+    "rootNamespace": "Core.ScriptableObjects",
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

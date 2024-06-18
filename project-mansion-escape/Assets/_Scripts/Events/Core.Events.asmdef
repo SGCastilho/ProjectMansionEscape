@@ -1,9 +1,9 @@
 {
-    "name": "Core.Player",
-    "rootNamespace": "Core.Player",
+    "name": "Core.Events",
+    "rootNamespace": "Core.Events",
     "references": [
-        "GUID:75469ad4d38634e559750d17036d5f7c",
-        "GUID:c7ef3ea736cccdb4aaeb2aabe73eaaa3"
+        "GUID:65afe4eee4f7fab4eb16a64fc1c4b27f",
+        "GUID:a138fe4769270d0409c9702af9a0c232"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
