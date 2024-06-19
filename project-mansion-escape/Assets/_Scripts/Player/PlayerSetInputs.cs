@@ -12,6 +12,8 @@ namespace Core.Player
 
         private bool _sprintStarted;
         private bool _sprintEnded;
+        private bool _aimStarted;
+        private bool _aimEnded;
 
         public void GetHorizontalAxis(InputAction.CallbackContext value)
         {
@@ -32,6 +34,27 @@ namespace Core.Player
             {
                 _behaviour.Movement.EndSprint();
             }
+        }
+
+        public void SetAimAction(InputAction.CallbackContext value)
+        {
+            _aimStarted = value.started;
+            _aimEnded = value.canceled;
+
+            if(_aimStarted)
+            {
+                _behaviour.Attack.StartAim();
+            }
+
+            if(_aimEnded)
+            {
+                _behaviour.Attack.EndAim();
+            }
+        }
+
+        public void AttackAction(InputAction.CallbackContext value)
+        {
+            _behaviour.Attack.Attacking();
         }
     }
 }

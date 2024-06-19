@@ -11,11 +11,13 @@ namespace Core.Player
 
         [Header("Settings")]
         [SerializeField] [Range(100f, 600f)] private float _walkSpeed = 200f;
+        [SerializeField] [Range(60f, 200f)] private float _aimSpeed = 100f;
         [Space(12)]
         [SerializeField] [Range(200f, 800f)] private float _sprintSpeed = 400f;
         [SerializeField] [Range(1f, 6f)] private float _sprintBreath = 4f;
         [SerializeField] [Range(6f, 10f)] private float _breathRecuperation = 8f;
 
+        private bool _isAiming;
         private bool _isSprinting;
         private bool _sprintInCouldown;
 
@@ -48,7 +50,7 @@ namespace Core.Player
 
         private void SprintCounters()
         {
-            if (_isSprinting && !_sprintInCouldown)
+            if (_isSprinting && !_isAiming && !_sprintInCouldown)
             {
                 _currentSprintBreath += Time.deltaTime;
                 if (_currentSprintBreath >= _sprintBreath)
@@ -59,7 +61,7 @@ namespace Core.Player
                 }
             }
 
-            if (!_isSprinting && _currentSprintBreath > 0 && !_sprintInCouldown)
+            if (!_isSprinting && _isAiming &&_currentSprintBreath > 0 && !_sprintInCouldown)
             {
                 _currentSprintBreath -= Time.deltaTime;
                 if (_currentSprintBreath <= 0)
@@ -83,7 +85,7 @@ namespace Core.Player
 
         internal void StartSprint()
         {
-            if(!_sprintInCouldown) 
+            if(!_sprintInCouldown && !_isAiming) 
             {
                 _isSprinting = true;
                 _currentSpeed = _sprintSpeed;
@@ -92,8 +94,31 @@ namespace Core.Player
 
         internal void EndSprint()
         {
-            _isSprinting = false;
-            _currentSpeed = _walkSpeed;
+            if(!_isAiming)
+            {
+                _isSprinting = false;
+                _currentSpeed = _walkSpeed;
+            }
+        }
+
+        internal void StartAim()
+        {
+            _isAiming = true;
+            _currentSpeed = _aimSpeed;
+        }
+
+        internal void EndAim()
+        {
+            _isAiming = false;
+
+            if(_isSprinting)
+            {
+                _currentSpeed = _sprintSpeed;
+            }
+            else
+            {
+                _currentSpeed = _walkSpeed;
+            }
         }
     }
 }

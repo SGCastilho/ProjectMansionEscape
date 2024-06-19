@@ -817,6 +817,8 @@ GameObject:
   - component: {fileID: 1229231782}
   - component: {fileID: 1229231781}
   - component: {fileID: 1229231783}
+  - component: {fileID: 1229231786}
+  - component: {fileID: 1229231787}
   - component: {fileID: 1229231785}
   - component: {fileID: 1229231780}
   - component: {fileID: 1229231779}
@@ -841,6 +843,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1495738978}
+  - {fileID: 2037984586}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1229231779
@@ -962,6 +965,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 802d20d3-4700-43b1-b26b-752cb02eb70e
     m_ActionName: Gameplay/Sprint[/Keyboard/shift]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1229231782}
+        m_TargetAssemblyTypeName: Core.Player.PlayerSetInputs, Core.Player
+        m_MethodName: AttackAction
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 5026197f-9aec-4a5f-a103-e447331975b9
+    m_ActionName: Gameplay/Attack[/Mouse/leftButton,/Keyboard/enter]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1229231782}
+        m_TargetAssemblyTypeName: Core.Player.PlayerSetInputs, Core.Player
+        m_MethodName: SetAimAction
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 8f1d3ebe-d91d-456e-bcd5-519c5ac7e9bd
+    m_ActionName: Gameplay/Aim[/Mouse/rightButton,/Keyboard/rightShift,/Keyboard/ctrl]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: PC
   m_DefaultActionMap: Gameplay
@@ -995,6 +1030,7 @@ MonoBehaviour:
   _behaviour: {fileID: 1229231784}
   _rb2D: {fileID: 1229231779}
   _walkSpeed: 260
+  _aimSpeed: 100
   _sprintSpeed: 400
   _sprintBreath: 4
   _breathRecuperation: 8
@@ -1012,6 +1048,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _inputs: {fileID: 1229231782}
   _movement: {fileID: 1229231783}
+  _attack: {fileID: 1229231786}
+  _animation: {fileID: 1229231787}
   _equipment: {fileID: 1229231785}
 --- !u!114 &1229231785
 MonoBehaviour:
@@ -1026,8 +1064,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentEquipedWeapon: {fileID: 0}
-  _weaponParent: {fileID: 1495738978}
-  testeEquip: {fileID: 11400000, guid: 454b61acd7cbdc54ba49ab032a79858c, type: 2}
+  _weaponPivot: {fileID: 2037984586}
+  _debugEquip: {fileID: 11400000, guid: d8721d3826191e94fb3ea873a35962bd, type: 2}
+--- !u!114 &1229231786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1229231777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d149b17ef0f66db4bb696511ffb0b5c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _behaviour: {fileID: 1229231784}
+  _isAiming: 0
+  _weaponParent: {fileID: 2037984586}
+--- !u!114 &1229231787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1229231777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0b9cb71f6c347a428b33668ed6e644b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerAnimator: {fileID: 2037984587}
+  _meleeAttackCouldown: 1
+  _pistolAttackCouldown: 1.4
 --- !u!1 &1382598633
 GameObject:
   m_ObjectHideFlags: 0
@@ -1077,6 +1145,10 @@ MonoBehaviour:
     _poolKey: equipment_weapon_wood
     _poolMaxInstances: 2
     _poolPrefab: {fileID: 7823809740375093298, guid: f3ab88bb1ba46ed42b017d9bd08f04a0, type: 3}
+  - _poolName: Weapon Pistol
+    _poolKey: equipment_weapon_ranged_pistol
+    _poolMaxInstances: 2
+    _poolPrefab: {fileID: 6449276684685415182, guid: cd5f4215f7c08094c875f05cadf706a5, type: 3}
 --- !u!1 &1468138087
 GameObject:
   m_ObjectHideFlags: 0
@@ -1269,6 +1341,59 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2037984585
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2037984586}
+  - component: {fileID: 2037984587}
+  m_Layer: 0
+  m_Name: WeaponPivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2037984586
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2037984585}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1229231778}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &2037984587
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2037984585}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a48660848aa2a254a8d54a236bebec7b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
