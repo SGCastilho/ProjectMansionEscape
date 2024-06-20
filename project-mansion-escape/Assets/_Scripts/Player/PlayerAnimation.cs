@@ -4,6 +4,10 @@ namespace Core.Player
 {
     public sealed class PlayerAnimation : MonoBehaviour
     {
+        #region Encapsulation
+        internal bool IsPistolAttacked { get => _isPistolAttacked; }
+        #endregion
+
         private const string MELEE_ATTACK_KEY = "IsMeleeAttacking";
         private const string PISTOL_ATTACK_KEY = "IsPistolAttacking";
 

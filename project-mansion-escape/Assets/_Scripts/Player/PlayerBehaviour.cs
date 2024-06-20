@@ -8,8 +8,8 @@ namespace Core.Player
         internal PlayerSetInputs Inputs { get => _inputs; }
         internal PlayerMovement Movement { get => _movement; }
         internal PlayerAnimation Animation { get => _animation; }
-        internal PlayerAttack Attack { get => _attack; }
 
+        public PlayerAttack Attack { get => _attack; }
         public PlayerEquipment Equipment { get => _equipment; }
         #endregion
 

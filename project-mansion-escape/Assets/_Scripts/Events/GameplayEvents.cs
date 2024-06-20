@@ -15,11 +15,15 @@ namespace Core.Events
         private void OnEnable()
         {
             _behaviour.Equipment.OnEquipingWeapon += _poolingManager.SpawnPooling;
+
+            _behaviour.Attack.OnShooting += _poolingManager.SpawnPooling;
         }
 
         private void OnDisable()
         {
             _behaviour.Equipment.OnEquipingWeapon -= _poolingManager.SpawnPooling;
+
+            _behaviour.Attack.OnShooting -= _poolingManager.SpawnPooling;
         }
     }
 }

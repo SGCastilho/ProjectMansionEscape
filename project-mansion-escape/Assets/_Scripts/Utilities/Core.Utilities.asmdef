@@ -1,11 +1,7 @@
 {
-    "name": "Core.Player",
-    "rootNamespace": "Core.Player",
-    "references": [
-        "GUID:b19d2be9a0575424088149c36929cfae",
-        "GUID:75469ad4d38634e559750d17036d5f7c",
-        "GUID:c7ef3ea736cccdb4aaeb2aabe73eaaa3"
-    ],
+    "name": "Core.Utilities",
+    "rootNamespace": "Core.Utilities",
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
