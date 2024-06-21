@@ -1,5 +1,6 @@
 using Core.Player;
 using Core.Managers;
+using Core.Inventory;
 using UnityEngine;
 
 namespace Core.Events
@@ -11,12 +12,17 @@ namespace Core.Events
 
         [Header("Managers Classes")]
         [SerializeField] private ObjectPoolingManager _poolingManager;
+        [Space(12)]
+        [SerializeField] private InventoryManager _inventoryManager;
 
         private void OnEnable()
         {
             _behaviour.Equipment.OnEquipingWeapon += _poolingManager.SpawnPooling;
 
             _behaviour.Attack.OnShooting += _poolingManager.SpawnPooling;
+
+            _inventoryManager.OnEquipWeapon += _behaviour.Equipment.EquipWeapon;
+            _inventoryManager.OnDesequipWeapon += _behaviour.Equipment.DesequipWeapon;
         }
 
         private void OnDisable()
@@ -24,6 +30,9 @@ namespace Core.Events
             _behaviour.Equipment.OnEquipingWeapon -= _poolingManager.SpawnPooling;
 
             _behaviour.Attack.OnShooting -= _poolingManager.SpawnPooling;
+
+            _inventoryManager.OnEquipWeapon -= _behaviour.Equipment.EquipWeapon;
+            _inventoryManager.OnDesequipWeapon -= _behaviour.Equipment.DesequipWeapon;
         }
     }
 }

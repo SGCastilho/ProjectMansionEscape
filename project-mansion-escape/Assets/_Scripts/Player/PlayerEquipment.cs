@@ -17,27 +17,10 @@ namespace Core.Player
         [Space(12)]
         [SerializeField] private Transform _weaponPivot;
 
-        //DEBBUG
-        [SerializeField] private EquipmentData _debugEquip;
-
-        void Update()
-        {
-            if(Input.GetKeyUp(KeyCode.E))
-            {
-                EquipWeapon(ref _debugEquip);
-            }
-
-            if(Input.GetKeyUp(KeyCode.F))
-            {
-                DesequipWeapon();
-            }
-        }
-        //DEBBUG
-
         private string _currentWeaponKey;
         private GameObject _currentEquipedWeaponGameObject;
 
-        public void EquipWeapon(ref EquipmentData equipmentData)
+        public void EquipWeapon(EquipmentData equipmentData)
         {
             if(_currentEquipedWeapon != null)
             {
@@ -52,6 +35,8 @@ namespace Core.Player
 
         public void DesequipWeapon()
         {
+            if(_currentEquipedWeapon == null) return;
+
             _currentEquipedWeapon = null;
             _currentWeaponKey = string.Empty;
 

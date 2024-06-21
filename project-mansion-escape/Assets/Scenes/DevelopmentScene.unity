@@ -706,6 +706,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 244719484}
   m_CullTransparentMesh: 1
+--- !u!1 &274911574
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 274911575}
+  - component: {fileID: 274911576}
+  m_Layer: 0
+  m_Name: InventoryManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &274911575
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 274911574}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &274911576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 274911574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef2850002ee9c4e44be09e6715cec72b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _inventoryOcuppedSlots: 0
+  _inventoryMaxSlots: 12
+  itemAdd: {fileID: 11400000, guid: 47ac978bef0a93543aef2368629db3d8, type: 2}
 --- !u!1 &288585270
 GameObject:
   m_ObjectHideFlags: 0
@@ -2914,6 +2961,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _behaviour: {fileID: 1229231784}
   _poolingManager: {fileID: 1382598635}
+  _inventoryManager: {fileID: 274911576}
 --- !u!1 &826981192
 GameObject:
   m_ObjectHideFlags: 0
@@ -5509,7 +5557,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _currentEquipedWeapon: {fileID: 0}
   _weaponPivot: {fileID: 2037984586}
-  _debugEquip: {fileID: 11400000, guid: d8721d3826191e94fb3ea873a35962bd, type: 2}
 --- !u!114 &1229231786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9005,6 +9052,7 @@ SceneRoots:
   - {fileID: 1934204082}
   - {fileID: 785388159}
   - {fileID: 618263058}
+  - {fileID: 274911575}
   - {fileID: 1382598634}
   - {fileID: 1665722819}
   - {fileID: 2087873919}

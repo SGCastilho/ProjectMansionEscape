@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb66f4cfbbcea0d41973f25ee5a93f01, type: 3}
+  m_Name: ColtInventoryData
+  m_EditorClassIdentifier: 
+  _itemKey: item_weapon_pistol
+  _itemName: Colt 1911
+  _itemSprite: {fileID: 97856093, guid: 07bfaefa485a3334caadc5c970f0d7d8, type: 3}
+  _itemSlotLimit: 1
+  _itemType: 1
+  _weaponToEquip: {fileID: 11400000, guid: d8721d3826191e94fb3ea873a35962bd, type: 2}
