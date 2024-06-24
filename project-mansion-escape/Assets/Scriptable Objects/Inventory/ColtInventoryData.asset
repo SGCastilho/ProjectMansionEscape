@@ -17,4 +17,7 @@ MonoBehaviour:
   _itemSprite: {fileID: 97856093, guid: 07bfaefa485a3334caadc5c970f0d7d8, type: 3}
   _itemSlotLimit: 1
   _itemType: 1
+  _itemDescription: A colt 1911 (i think).
   _weaponToEquip: {fileID: 11400000, guid: d8721d3826191e94fb3ea873a35962bd, type: 2}
+  _healthRecovery: 20
+  _devNotes: Put your dev notes here.

@@ -17,4 +17,7 @@ MonoBehaviour:
   _itemSprite: {fileID: -455466761, guid: 07bfaefa485a3334caadc5c970f0d7d8, type: 3}
   _itemSlotLimit: 1
   _itemType: 1
+  _itemDescription: A wood slab, it's good to face the enemies.
   _weaponToEquip: {fileID: 11400000, guid: 454b61acd7cbdc54ba49ab032a79858c, type: 2}
+  _healthRecovery: 20
+  _devNotes: Put your dev notes here.

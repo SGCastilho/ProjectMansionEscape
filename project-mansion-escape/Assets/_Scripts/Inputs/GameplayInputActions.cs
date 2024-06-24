@@ -64,6 +64,15 @@ namespace Core.Inputs
                     ""processors"": """",
                     ""interactions"": ""Hold"",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Inventory"",
+                    ""type"": ""Button"",
+                    ""id"": ""9f0a39e1-551f-443b-8c9c-a44b926c1223"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -165,6 +174,17 @@ namespace Core.Inputs
                     ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ea6221de-88ad-4cfc-952b-fbbfae6567da"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -194,6 +214,7 @@ namespace Core.Inputs
             m_Gameplay_Sprint = m_Gameplay.FindAction("Sprint", throwIfNotFound: true);
             m_Gameplay_Attack = m_Gameplay.FindAction("Attack", throwIfNotFound: true);
             m_Gameplay_Aim = m_Gameplay.FindAction("Aim", throwIfNotFound: true);
+            m_Gameplay_Inventory = m_Gameplay.FindAction("Inventory", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -259,6 +280,7 @@ namespace Core.Inputs
         private readonly InputAction m_Gameplay_Sprint;
         private readonly InputAction m_Gameplay_Attack;
         private readonly InputAction m_Gameplay_Aim;
+        private readonly InputAction m_Gameplay_Inventory;
         public struct GameplayActions
         {
             private @GameplayInputActions m_Wrapper;
@@ -267,6 +289,7 @@ namespace Core.Inputs
             public InputAction @Sprint => m_Wrapper.m_Gameplay_Sprint;
             public InputAction @Attack => m_Wrapper.m_Gameplay_Attack;
             public InputAction @Aim => m_Wrapper.m_Gameplay_Aim;
+            public InputAction @Inventory => m_Wrapper.m_Gameplay_Inventory;
             public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -288,6 +311,9 @@ namespace Core.Inputs
                 @Aim.started += instance.OnAim;
                 @Aim.performed += instance.OnAim;
                 @Aim.canceled += instance.OnAim;
+                @Inventory.started += instance.OnInventory;
+                @Inventory.performed += instance.OnInventory;
+                @Inventory.canceled += instance.OnInventory;
             }
 
             private void UnregisterCallbacks(IGameplayActions instance)
@@ -304,6 +330,9 @@ namespace Core.Inputs
                 @Aim.started -= instance.OnAim;
                 @Aim.performed -= instance.OnAim;
                 @Aim.canceled -= instance.OnAim;
+                @Inventory.started -= instance.OnInventory;
+                @Inventory.performed -= instance.OnInventory;
+                @Inventory.canceled -= instance.OnInventory;
             }
 
             public void RemoveCallbacks(IGameplayActions instance)
@@ -336,6 +365,7 @@ namespace Core.Inputs
             void OnSprint(InputAction.CallbackContext context);
             void OnAttack(InputAction.CallbackContext context);
             void OnAim(InputAction.CallbackContext context);
+            void OnInventory(InputAction.CallbackContext context);
         }
     }
 }

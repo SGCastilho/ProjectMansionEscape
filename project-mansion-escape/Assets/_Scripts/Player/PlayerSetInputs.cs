@@ -7,13 +7,18 @@ namespace Core.Player
     {
         [Header("Classes")]
         [SerializeField] private PlayerBehaviour _behaviour;
+        [SerializeField] private PlayerInput _playerInput;
 
-        internal float HorizontalAxis {get; private set;}
+        internal float HorizontalAxis { get; private set; }
 
         private bool _sprintStarted;
         private bool _sprintEnded;
         private bool _aimStarted;
         private bool _aimEnded;
+
+        public void EnableInputs() => _playerInput.ActivateInput();
+
+        public void DisableInputs() => _playerInput.DeactivateInput();
 
         public void GetHorizontalAxis(InputAction.CallbackContext value)
         {

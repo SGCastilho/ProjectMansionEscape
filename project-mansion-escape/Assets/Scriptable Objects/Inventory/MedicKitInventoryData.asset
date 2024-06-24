@@ -17,4 +17,7 @@ MonoBehaviour:
   _itemSprite: {fileID: 446805950, guid: 07bfaefa485a3334caadc5c970f0d7d8, type: 3}
   _itemSlotLimit: 12
   _itemType: 0
+  _itemDescription: This is a Medic Kit, i can heal me a lot with this.
   _weaponToEquip: {fileID: 0}
+  _healthRecovery: 20
+  _devNotes: Put your dev notes here.

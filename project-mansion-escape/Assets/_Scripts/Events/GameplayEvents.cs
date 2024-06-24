@@ -1,3 +1,4 @@
+using Core.UI;
 using Core.Player;
 using Core.Managers;
 using Core.Inventory;
@@ -7,6 +8,9 @@ namespace Core.Events
 {
     public sealed class GameplayEvents : MonoBehaviour
     {
+        [Header("UI Classes")]
+        [SerializeField] private InventoryUI _inventoryUI;
+
         [Header("Player Classes")]
         [SerializeField] private PlayerBehaviour _behaviour;
 
@@ -23,6 +27,15 @@ namespace Core.Events
 
             _inventoryManager.OnEquipWeapon += _behaviour.Equipment.EquipWeapon;
             _inventoryManager.OnDesequipWeapon += _behaviour.Equipment.DesequipWeapon;
+
+            _inventoryManager.OnUseItem += _behaviour.Status.AddHealth;
+
+            _inventoryManager.OnItemAdd += _inventoryUI.AddItem;
+            _inventoryUI.OnUseItem += _inventoryManager.UseAction;
+            _inventoryUI.OnEquipItem += _inventoryManager.EquipAction;
+            _inventoryUI.OnDiscardItem += _inventoryManager.RemoveItem;
+            _inventoryUI.OnUnequipItem += _inventoryManager.DesequipWeapon;
+            _inventoryManager.OnUnequipWeapon += _inventoryUI.UnequipUI;
         }
 
         private void OnDisable()
@@ -33,6 +46,15 @@ namespace Core.Events
 
             _inventoryManager.OnEquipWeapon -= _behaviour.Equipment.EquipWeapon;
             _inventoryManager.OnDesequipWeapon -= _behaviour.Equipment.DesequipWeapon;
+
+            _inventoryManager.OnUseItem -= _behaviour.Status.AddHealth;
+
+            _inventoryManager.OnItemAdd -= _inventoryUI.AddItem;
+            _inventoryUI.OnUseItem -= _inventoryManager.UseAction;
+            _inventoryUI.OnEquipItem -= _inventoryManager.EquipAction;
+            _inventoryUI.OnDiscardItem -= _inventoryManager.RemoveItem;
+            _inventoryUI.OnUnequipItem -= _inventoryManager.DesequipWeapon;
+            _inventoryManager.OnUnequipWeapon -= _inventoryUI.UnequipUI;
         }
     }
 }

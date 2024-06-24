@@ -24,10 +24,22 @@ namespace Core.Inventory
             }
         }
 
+        #region UI Events
+        public delegate void ItemAdd(ItemData itemData);
+        public event ItemAdd OnItemAdd;
+
+        public Action OnUnequipWeapon;
+        #endregion
+
+        #region Backend Events
         public delegate void EquipWeapon(EquipmentData equipmentData);
         public event EquipWeapon OnEquipWeapon;
 
         public Action OnDesequipWeapon;
+
+        public delegate void UseItem(int amount);
+        public event UseItem OnUseItem;
+        #endregion
 
         [Header("Settings")]
         [SerializeField] private int _inventoryOcuppedSlots;
@@ -51,11 +63,6 @@ namespace Core.Inventory
             {
                 RemoveItem(itemAdd.Key);
             }
-
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                //FAZER FUNÇÃO DE USAR ITEM
-            }
         }
         //DEBUG
 
@@ -77,6 +84,8 @@ namespace Core.Inventory
 
                     _inventoryOcuppedSlots++;
 
+                    OnItemAdd?.Invoke(_inventory[itemData.Key].Data);
+
                     Debug.Log($"New item added to inventory, {itemData.Name} now is {_inventory[itemData.Key].Amount}");
                 }
             }
@@ -87,6 +96,8 @@ namespace Core.Inventory
                 _inventory.Add(newItem.Data.Key, newItem);
 
                 _inventoryOcuppedSlots++;
+
+                OnItemAdd?.Invoke(_inventory[itemData.Key].Data);
 
                 Debug.Log($"New item added to inventory, {newItem.Data.Name}");
             }
@@ -99,6 +110,8 @@ namespace Core.Inventory
                 if(_currentEquipedWeapon == itemKey)
                 {
                     DesequipWeapon();
+
+                    OnUnequipWeapon?.Invoke();
                 }
 
                 _inventory[itemKey].Amount--;
@@ -176,6 +189,41 @@ namespace Core.Inventory
             OnDesequipWeapon?.Invoke();
 
             Debug.LogWarning("Weapon has been unequiped");
+        }
+
+        public void UseAction(string itemKey)
+        {
+            if(_inventory.ContainsKey(itemKey))
+            {
+                if(_inventory[itemKey].Data.Type == ItemType.USABLE)
+                {
+                    OnUseItem?.Invoke(_inventory[itemKey].Data.HealthRecovery);
+
+                    Debug.Log($"Item has been used, {_inventory[itemKey].Data.Name}");
+
+                    RemoveItem(itemKey);
+                }
+            }
+            else
+            {
+                Debug.LogWarning($"No item founded, {itemKey}");
+            }
+        }
+
+        public void ExamineAction(string itemKey)
+        {
+            if(_inventory.ContainsKey(itemKey))
+            {
+                //TEMPORARIO FAZER APARECER NA TELA
+                Debug.Log($"{_inventory[itemKey].Data.Description}");
+                //TEMPORARIO FAZER APARECER NA TELA
+
+                Debug.Log($"Item has been examined, {_inventory[itemKey].Data.Name}");
+            }
+            else
+            {
+                Debug.LogWarning($"No item founded, {itemKey}");
+            }
         }
     }
 }

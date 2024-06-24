@@ -1,11 +1,8 @@
 {
-    "name": "Core.Events",
-    "rootNamespace": "Core.Events",
+    "name": "Core.UI",
+    "rootNamespace": "Core.UI",
     "references": [
-        "GUID:48bd8107da1e49044a8780f0a740e277",
-        "GUID:65afe4eee4f7fab4eb16a64fc1c4b27f",
-        "GUID:2b5bf643f8052044da0c720c8e4ebae5",
-        "GUID:a138fe4769270d0409c9702af9a0c232",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
         "GUID:c7ef3ea736cccdb4aaeb2aabe73eaaa3"
     ],
     "includePlatforms": [],
