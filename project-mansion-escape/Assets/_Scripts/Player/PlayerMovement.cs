@@ -111,19 +111,27 @@ namespace Core.Player
 
         internal void StartSprint()
         {
-            if(!_sprintInCouldown && !_isAiming) 
+            if(!_sprintInCouldown) 
             {
                 _isSprinting = true;
-                _currentSpeed = _sprintSpeed;
+
+                if(!_isAiming)
+                {
+                    _currentSpeed = _sprintSpeed;
+                }
             }
         }
 
         internal void EndSprint()
         {
+            _isSprinting = false;
+
             if(!_isAiming)
             {
-                _isSprinting = false;
-                _currentSpeed = _walkSpeed;
+                if(!_isSprinting)
+                {
+                    _currentSpeed = _walkSpeed;
+                }
             }
         }
 

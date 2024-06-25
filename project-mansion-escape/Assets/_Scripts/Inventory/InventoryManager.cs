@@ -125,7 +125,7 @@ namespace Core.Inventory
                     _inventoryOcuppedSlots = 0; 
                 }
 
-                if(_inventory[itemKey].Amount < 1)
+                if(_inventory[itemKey].Amount <= 0)
                 {
                     Debug.LogWarning($"All itens has been removed from your inventory, {_inventory[itemKey].Data.Name}");
 
@@ -200,8 +200,6 @@ namespace Core.Inventory
                     OnUseItem?.Invoke(_inventory[itemKey].Data.HealthRecovery);
 
                     Debug.Log($"Item has been used, {_inventory[itemKey].Data.Name}");
-
-                    RemoveItem(itemKey);
                 }
             }
             else

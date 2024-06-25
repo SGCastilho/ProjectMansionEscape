@@ -9,6 +9,9 @@ namespace Core.Player
         public int MaxHealth { get => _maxHealth; }
         public bool IsDead { get => _isDead; }
         #endregion
+        
+        public delegate void ChangeHealth(int currentHealth, int maxHealth);
+        public event ChangeHealth OnChangeHealth;
 
         [Header("Classes")]
         [SerializeField] private PlayerBehaviour _behaviour;
@@ -20,9 +23,17 @@ namespace Core.Player
 
         private bool _isDead;
 
+        void Update()
+        {
+            if(Input.GetKeyDown(KeyCode.F1))
+            {
+                RemoveHealth(20);
+            }
+        }
+
         private void OnEnable()
         {
-            _currentHealth = _maxHealth;
+            AddHealth(_maxHealth);
             _isDead = false;
         }
 
@@ -34,6 +45,8 @@ namespace Core.Player
             { 
                 _currentHealth = _maxHealth; 
             }
+
+            OnChangeHealth?.Invoke(_currentHealth, _maxHealth);
         }
 
         public void RemoveHealth(int amount)
@@ -41,6 +54,8 @@ namespace Core.Player
             _currentHealth -= amount;
 
             if(_currentHealth <= 0) { PlayerDeath(); }
+
+            OnChangeHealth?.Invoke(_currentHealth, _maxHealth);
         }
 
         private void PlayerDeath()
@@ -49,6 +64,8 @@ namespace Core.Player
             _isDead = true;
 
             _behaviour.Inputs.DisableInputs();
+
+            Debug.LogWarning("PLAYER DEAD");
         }
     }
 }

@@ -9,6 +9,7 @@ namespace Core.Events
     public sealed class GameplayEvents : MonoBehaviour
     {
         [Header("UI Classes")]
+        [SerializeField] private PlayerUI _playerUI;
         [SerializeField] private InventoryUI _inventoryUI;
 
         [Header("Player Classes")]
@@ -21,6 +22,8 @@ namespace Core.Events
 
         private void OnEnable()
         {
+            _behaviour.Status.OnChangeHealth += _playerUI.RefreshHealthBar;
+
             _behaviour.Equipment.OnEquipingWeapon += _poolingManager.SpawnPooling;
 
             _behaviour.Attack.OnShooting += _poolingManager.SpawnPooling;
@@ -40,6 +43,8 @@ namespace Core.Events
 
         private void OnDisable()
         {
+            _behaviour.Status.OnChangeHealth -= _playerUI.RefreshHealthBar;
+
             _behaviour.Equipment.OnEquipingWeapon -= _poolingManager.SpawnPooling;
 
             _behaviour.Attack.OnShooting -= _poolingManager.SpawnPooling;

@@ -6,11 +6,11 @@ namespace Core.Player
     {
         #region Encapsulation
         internal PlayerSetInputs Inputs { get => _inputs; }
-        internal PlayerMovement Movement { get => _movement; }
         internal PlayerAnimation Animation { get => _animation; }
 
         public PlayerStatus Status { get => _status; }
         public PlayerAttack Attack { get => _attack; }
+        public PlayerMovement Movement { get => _movement; }
         public PlayerEquipment Equipment { get => _equipment; }
         #endregion
 
